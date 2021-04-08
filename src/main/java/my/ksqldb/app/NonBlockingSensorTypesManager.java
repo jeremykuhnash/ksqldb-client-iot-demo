@@ -39,11 +39,14 @@ public class NonBlockingSensorTypesManager {
    * @param serverHost ksqlDB server address
    * @param serverPort ksqlDB server port
    */
-  public NonBlockingSensorTypesManager(String serverHost, int serverPort) {
+  public NonBlockingSensorTypesManager(String serverHost, int port, String username, String password) {
     ClientOptions options = ClientOptions.create()
-        .setHost(serverHost)
-        .setPort(serverPort);
-    this.client = Client.create(options);
+	    .setHost(serverHost)
+	    .setPort(port)
+	    .setBasicAuthCredentials(username, password)
+	    .setUseTls(true)
+	    .setUseAlpn(true);
+	this.client = Client.create(options);
   }
 
   /**

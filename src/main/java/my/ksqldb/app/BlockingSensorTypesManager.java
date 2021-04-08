@@ -39,10 +39,13 @@ public class BlockingSensorTypesManager {
    * @param serverHost ksqlDB server address
    * @param serverPort ksqlDB server port
    */
-  public BlockingSensorTypesManager(String serverHost, int serverPort) {
+  public BlockingSensorTypesManager(String serverHost, int port, String username, String password) {
     ClientOptions options = ClientOptions.create()
         .setHost(serverHost)
-        .setPort(serverPort);
+	    .setPort(port)
+        .setBasicAuthCredentials(username, password)
+        .setUseTls(true)
+        .setUseAlpn(true);
     this.client = Client.create(options);
   }
 

@@ -36,8 +36,11 @@ import java.util.concurrent.ExecutionException;
  */
 public class DemoApp {
 
-  public static final String KSQLDB_SERVER_HOST = "localhost";
-  public static final int KSQLDB_SERVER_HOST_PORT = 8088;
+  public static final String KSQLDB_SERVER_HOST = "...";
+  public static final int KSQLDB_SERVER_HOST_PORT = 443;
+  public static final String KSQL_USERNAME = "...";
+  public static final String KSQL_PASSWORD = "...";
+  
 
   public static final String DRONE_LOCATIONS_TOPIC = "drone_locations";
   public static final String DRONE_LOCATIONS_TYPE = "drone_locations";
@@ -54,7 +57,7 @@ public class DemoApp {
 
   private static void blockingUsage() {
     BlockingSensorTypesManager blockingSTM =
-        new BlockingSensorTypesManager(KSQLDB_SERVER_HOST, KSQLDB_SERVER_HOST_PORT);
+        new BlockingSensorTypesManager(KSQLDB_SERVER_HOST, KSQLDB_SERVER_HOST_PORT, KSQL_USERNAME, KSQL_PASSWORD);
 
     // Add sensor type
     blockingSTM.addSensorType(DRONE_LOCATIONS_TYPE, DRONE_LOCATIONS_TOPIC);
@@ -70,7 +73,7 @@ public class DemoApp {
 
   private static void nonBlockingUsage() {
     NonBlockingSensorTypesManager nonBlockingSTM =
-        new NonBlockingSensorTypesManager(KSQLDB_SERVER_HOST, KSQLDB_SERVER_HOST_PORT);
+        new NonBlockingSensorTypesManager(KSQLDB_SERVER_HOST, KSQLDB_SERVER_HOST_PORT, KSQL_USERNAME, KSQL_PASSWORD);
 
     CompletableFuture<Void> cf = nonBlockingSTM
         // Add sensor type
